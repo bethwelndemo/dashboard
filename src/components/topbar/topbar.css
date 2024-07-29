@@ -1,0 +1,62 @@
+/* style topbar nav */
+.topbar{
+    display: flex;
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    right: 0;
+    background-color: aliceblue;
+    width: 75%;
+    overflow: auto;
+    justify-content: space-between;
+}
+
+/* style topbar admin */
+.topbar-admin{
+    color: rgb(225, 168, 24);
+    display: flex;
+    margin-top: 5px;
+    align-items: center;
+    margin-left: 10px;
+}
+
+/* topbar content */
+.topbar-content{
+    display: flex;
+    justify-content: space-between; 
+    margin-top: 5px;
+    align-items: center;
+}
+
+/* topbar date */
+.topbar-date{
+    display: flex;
+    align-items: center;
+    padding: 0.3rem;
+    height: 10px;
+    background-color: white;
+}
+
+.topbar-date span{
+    color: rgb(107, 107, 107);
+    margin-left: 0.5rem;
+}
+
+/* topbar icons */
+.topbar-icon{
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    gap: 1rem;
+}
+
+/* topbar image */
+.topbar-image{
+    align-items: center;
+    margin-right: 1.5rem;
+}
+/* target the svg icons */
+svg{
+    color: brown;
+    font-size: 24px;
+}
