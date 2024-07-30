@@ -1,9 +1,12 @@
 import React from 'react'
+import SideBar from '../sidebar/SideBar'
+import TopBar from '../topbar/TopBar'
 
 const Layout = () => {
   return (
     <div>
-      <h1>Layout</h1>
+       <SideBar/>
+       <TopBar/>
     </div>
   )
 }
