@@ -1,0 +1,59 @@
+/* table-styles.css */
+
+.table-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .table-title {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+    font-size: 2rem;
+  }
+  
+  .lab-tests-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .lab-tests-table thead {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .lab-tests-table th,
+  .lab-tests-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .lab-tests-table th {
+    font-weight: bold;
+  }
+  
+  .lab-tests-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .lab-tests-table tbody tr:hover {
+    background-color: #e0e0e0;
+    cursor: pointer;
+  }
+  
+  .lab-tests-table td {
+    font-size: 1rem;
+  }
+  
+  .lab-tests-table td:last-child {
+    text-align: center;
+  }
+  

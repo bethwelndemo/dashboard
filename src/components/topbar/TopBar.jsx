@@ -6,6 +6,8 @@ import { FaBell } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 
 const TopBar = () => {
+  //get lab name from local storage
+  const labname = localStorage.getItem("lab_name")
   return (
     <nav className='topbar'>
       {/* left side */}
@@ -15,7 +17,7 @@ const TopBar = () => {
       <div className="topbar-content">
         <div className="topbar-date">
             <AiFillCalendar />
-            <span>User: Bob </span>
+            <span>User: {labname}</span>
         </div>
 
         <div className="topbar-icon">
