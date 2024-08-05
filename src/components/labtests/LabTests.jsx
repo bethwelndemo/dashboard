@@ -27,43 +27,41 @@ const LabTests = () => {
 
     },[lab_id])
 
-    // lets console and see if we get all users
-    console.log(labtests)
-    if(loading){
-       return <p>loading</p>
-    }
-
     
-  return (
-   
-    <div className="cont">
-      <Layout/>
-      <div className="table-container">
-      
-      <h1 className="table-title">Lab Tests</h1>
-      <table className="lab-tests-table">
-        <thead>
-          <tr>
-            <th>Test Name</th>
-            <th>Description</th>
-            <th>Cost</th>
-            <th>Discount</th>
-          </tr>
-        </thead>
-        <tbody>
-          {labtests.map((test, index) => (
-            <tr key={index}>
-              <td>{test.test_name}</td>
-              <td>{test.test_description}</td>
-              <td>${test.test_cost}</td>
-              <td>{test.test_discount}%</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-    </div>
-  )
+    return (
+      <div className="cont">
+        <Layout />
+        {loading ? (
+          <div className="loading-container">
+            <p>Loading...</p>
+          </div>
+        ) : (
+          <div className="table-container">
+            <h1 className="table-title">Lab Tests</h1>
+            <table className="lab-tests-table">
+              <thead>
+                <tr>
+                  <th>Test Name</th>
+                  <th>Description</th>
+                  <th>Cost</th>
+                  <th>Discount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {labtests.map((test, index) => (
+                  <tr key={index}>
+                    <td>{test.test_name}</td>
+                    <td>{test.test_description}</td>
+                    <td>${test.test_cost}</td>
+                    <td>{test.test_discount}%</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    );
 }
 
 

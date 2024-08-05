@@ -1,137 +1,145 @@
-import React ,{useState}from 'react'
-import './addnurse.css'
-import Layout from '../layout/Layout'
-import axiosInstanceToken from '../../helpers/axiosinstanceToken'
-import CheckSession from '../../helpers/CheckSession'
+import React, { useState } from 'react';
+import './addnurse.css';
+import Layout from '../layout/Layout';
+import axiosInstanceToken from '../../helpers/axiosinstanceToken';
+import CheckSession from '../../helpers/CheckSession';
 
 const AddNurse = () => {
-  const {lab_name, lab_id, access_token} = CheckSession()
-  const [surname, setName] = useState(null)
-  const [others, setOthers] = useState(null)
-  const [gender, setGender] = useState(null)
-  const [phone, setPhone] = useState(null)
-  const [password, setPassword] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(null)
-  const [failure, setFailure] = useState(null)
+  // Extract session information
+  const { lab_id } = CheckSession();
 
+  // State hooks
+  const [surname, setSurname] = useState('');
+  const [others, setOthers] = useState('');
+  const [gender, setGender] = useState('');
+  const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState('');
+  const [failure, setFailure] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setLoading(true)
-    setSuccess(null)
-    setFailure(null)
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setSuccess('');
+    setFailure('');
 
-    axiosInstanceToken.post('/addnurse',{
-      lab_id,
-      surname:surname,
-      others:others,
-      gender: gender,
-      phone:phone,
-      password:password
-    })
-    .then(function(response){
-      console.log(response.data)
-      setLoading(false)
-      setSuccess(response.data.message)
-    })
-    .catch(function(error){
-      console.log(error.message);
-      setLoading(false)
-      setFailure(error.message);
-    })
-  }
+    try {
+      const response = await axiosInstanceToken.post('/addnurse', {
+        lab_id,
+        surname,
+        others,
+        gender,
+        phone,
+        password
+      });
+      console.log(response.data);
+      setSuccess(response.data.message);
+    } catch (error) {
+      console.error(error.message);
+      setFailure('Failed to add nurse. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div>
-    <Layout/>
-    <section className="container">
-      
-    <div className="form-container">
-      <h1 className="form-title">Add Nurse</h1>
-      {loading && <div className= "response" style={{color:'blue'}}> Please Wait..</div>}
-      {success && <div className= "response" style={{color:'green'}}> {success}</div>}
-      {failure && <div className= "response" style={{color:'red'}}> {failure}</div>}
-      <form className="nurse-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="name">Enter Name:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={surname}
-            onChange={(e) => setName(e.target.value)}
-            // Remove the value and onChange props
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="others">Enter Others:</label>
-          <input
-            type="text"
-            id="others"
-            name="others"
-            value={others}
-            onChange={(e) => setOthers(e.target.value)}
-            // Remove the value and onChange props
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Your Gender:</label>
-          <div className="gender-options">
-            <label>
+      <Layout />
+      <section className="container">
+        <div className="form-container">
+          <h1 className="form-title">Add Nurse</h1>
+          {loading && <div className="response" style={{ color: 'blue' }}>Please Wait...</div>}
+          {success && <div className="response" style={{ color: 'green' }}>{success}</div>}
+          {failure && <div className="response" style={{ color: 'red' }}>{failure}</div>}
+          <form className="nurse-form" onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="surname">Enter Surname:</label>
               <input
-                type="radio"
-                name="gender"
-                value={gender}
-                onChange={(e) => setGender(e.target.value)}
-                // Remove the checked and onChange props
-              /> Male
-            </label>
-            <label>
+                type="text"
+                id="surname"
+                name="surname"
+                value={surname}
+                onChange={(e) => setSurname(e.target.value)} // Handle change for surname
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="others">Enter Other Names:</label>
               <input
-                type="radio"
-                name="gender"
-                value={gender}
-                onChange={(e) => setGender(e.target.value)}
-                // Remove the checked and onChange props
-              /> Female
-            </label>
-          </div>
+                type="text"
+                id="others"
+                name="others"
+                value={others}
+                onChange={(e) => setOthers(e.target.value)} // Handle change for others
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Gender:</label>
+              <div className="gender-options">
+                <label>
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="Male"
+                    checked={gender === 'Male'}
+                    onChange={(e) => setGender(e.target.value)} // Handle change for gender
+                  />
+                  Male
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="Female"
+                    checked={gender === 'Female'}
+                    onChange={(e) => setGender(e.target.value)} // Handle change for gender
+                  />
+                  Female
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="Other"
+                    checked={gender === 'Other'}
+                    onChange={(e) => setGender(e.target.value)} // Handle change for gender
+                  />
+                  Other
+                </label>
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="phone">Enter Phone:</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)} // Handle change for phone
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="password">Enter Password:</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)} // Handle change for password
+              />
+            </div>
+
+            <button type="submit" className="submit-button">Submit</button>
+          </form>
         </div>
-
-        <div className="form-group">
-          <label htmlFor="phone">Enter Phone:</label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-
-            // Remove the value and onChange props
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Enter Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-
-            // Remove the value and onChange props
-          />
-        </div>
-
-        <button type="submit" className="submit-button">Submit</button>
-      </form>
+      </section>
     </div>
-    </section>
-  </div>
-  )
-}
+  );
+};
 
-export default AddNurse
+export default AddNurse;

@@ -1,0 +1,66 @@
+/* nurses.css */
+
+.cont {
+    padding: 20px;
+  }
+  
+  .loading-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .table-container {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  .table-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+    text-align: center;
+  }
+  
+  .nurses-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .nurses-table th, .nurses-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .nurses-table th {
+    background-color: #f4f4f4;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .nurses-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .nurses-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .nurses-table td {
+    color: #555;
+  }
+  
+  .nurses-table td:last-child {
+    color: #007bff;
+  }
+/* nurses.css */
+
+.no-data {
+    text-align: center;
+    color: #888;
+    padding: 20px;
+  }
+    

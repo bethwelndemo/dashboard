@@ -10,8 +10,13 @@ import { TbBrandBooking } from "react-icons/tb";
 import { FaUserNurse } from "react-icons/fa";
 import { PiSiren } from "react-icons/pi";
 import { CiLogout } from "react-icons/ci";
+import ReactLogout from '../../helpers/Logout';
+import CheckSession from '../../helpers/CheckSession';
 
 const SideBar = () => {
+  const {lab_name, lab_id, access_token} = CheckSession()
+  
+  const {logout} = ReactLogout()
   return (
       <section className='sidebar'>
         {/* links  */}
@@ -45,7 +50,7 @@ const SideBar = () => {
 
         {/* logout division */}
         <div className="p-4 sidebar-logout">
-          <button className="btn btn-dark btn-sm">
+          <button className="btn btn-dark btn-sm"  onClick={logout}>
           <CiLogout /> Logout
           </button>
         </div>
