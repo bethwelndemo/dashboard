@@ -7,29 +7,38 @@ import axiosInstanceToken from '../../helpers/axiosinstanceToken';
 const Nurses = () => {
   const [loading, setLoading] = useState(false);
   const [nurses, setNurses] = useState([]);
-  const { lab_name, lab_id, access_token } = CheckSession();
+  const [filterdata, setFilterData] = useState([]);
+  const [query, setQuery] = useState("");
   const [error, setError] = useState(null);
 
+  const { lab_name, lab_id, access_token } = CheckSession();
 
-  
+  useEffect(() => {
+    setLoading(true);
+    axiosInstanceToken.post("/viewnurses", { lab_id })
+      .then(response => {
+        console.log(response.data);
+        setNurses(response.data);
+        setFilterData(response.data); // Initialize filterdata with fetched data
+        setLoading(false);
+      })
+      .catch(error => {
+        console.log(error);
+        setError(error.message);
+        setLoading(false);
+      });
+  }, [lab_id]);
 
-  useEffect(()=>{
-    setLoading(true)
-    axiosInstanceToken.post("/viewnurses", {
-      lab_id:lab_id
-    })
-    .then(function(response){
-      console.log(response.data);
-      setNurses(response.data);
-      setLoading(false)
-    })
-    .catch(function(error){
-      console.log(error);
-      setError(error.message)
-      setLoading(false)
-    })
-  },[])
-  // console.log(nurses)
+  // Function to handle live search
+  const handleSearch = (value) => {
+    setQuery(value);
+    const filterresult = nurses.filter((item) =>
+      item.surname.toLowerCase().includes(value.toLowerCase()) ||
+      (item.others && item.others.toLowerCase().includes(value.toLowerCase()))
+    );
+    setFilterData(filterresult);
+  };
+
   return (
     <div className="cont">
       <Layout />
@@ -41,6 +50,13 @@ const Nurses = () => {
         <div className="table-container">
           <h1 className="table-title">Nurses</h1>
           {error && <div className="error-message">{error}</div>}
+          <input
+            type="text"
+            placeholder='Search Nurse'
+            className='form-control mb-3'
+            value={query}
+            onChange={(e) => handleSearch(e.target.value)}
+          />
           <table className="nurses-table">
             <thead>
               <tr>
@@ -51,8 +67,8 @@ const Nurses = () => {
               </tr>
             </thead>
             <tbody>
-              {nurses.length > 0 ? (
-                nurses.map((nurse, index) => (
+              {filterdata.length > 0 ? (
+                filterdata.map((nurse, index) => (
                   <tr key={index}>
                     <td>{nurse.surname}</td>
                     <td>{nurse.others}</td>

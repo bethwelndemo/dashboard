@@ -3,6 +3,7 @@ import './addtests.css'
 import axiosInstanceToken from '../../helpers/axiosinstanceToken'
 import Layout from '../layout/Layout'
 import CheckSession from '../../helpers/CheckSession'
+import '../../index.css'
 
 
 const AddLabTests = () => {
@@ -44,7 +45,7 @@ const AddLabTests = () => {
     }
 
     return (
-        <div className="containerrr">
+        <div className="container">
           <form onSubmit={handleSubmit} className="add-lab-test-form">
           <Layout/>
           <h2>Add Lab Test</h2>

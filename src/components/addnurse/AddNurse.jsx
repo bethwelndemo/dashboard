@@ -3,6 +3,8 @@ import './addnurse.css';
 import Layout from '../layout/Layout';
 import axiosInstanceToken from '../../helpers/axiosinstanceToken';
 import CheckSession from '../../helpers/CheckSession';
+import '../../index.css'
+
 
 const AddNurse = () => {
   // Extract session information

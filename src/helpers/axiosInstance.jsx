@@ -15,7 +15,7 @@
 
  const axiosInstance = axios.create({
 
- baseURL: 'https://peeter.pythonanywhere.com/api', // Replace with your API's base URL
+ baseURL: 'https://advance.pythonanywhere.com/api', // Replace with your API's base URL
 
  timeout: 30000, // Adjust the timeout as needed (in milliseconds)
 

@@ -2,7 +2,7 @@ import React from 'react'
 import './maincontent.css'
 import Layout from '../layout/Layout'
 import CheckSession from '../../helpers/CheckSession'
-
+import '../../index.css'
 
 const MainContent = () => {
   // check if user is logged in using checksession
@@ -12,7 +12,7 @@ const MainContent = () => {
   return (
     <div>
       <Layout/>
-      <section className="containerr">
+      <section className="containa">
         <h1>Dashboard</h1>
         <div className="row">
           <div className="col-md-4">
